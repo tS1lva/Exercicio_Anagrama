@@ -14,8 +14,8 @@ void imprime_anagrama(char *vetor_anagrama){
     }
 };
 
-int main(){
-    char vetor_anagrama[];
-
-    return 0;
-};
+int main () {
+    char vetorPalavras[MAX][15];
+    char vetorLetras[MAX];
+    char vetorRespostas[MAX][15];
+}
