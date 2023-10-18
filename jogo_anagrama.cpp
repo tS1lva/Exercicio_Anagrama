@@ -27,9 +27,13 @@ int confere (char *vetorPalavras[MAX], char resposta[15]) {
 }
 
 int main () {
-    char vetorPalavras[MAX][15];
+    char vetorPalavras[MAX][15] = {
+    "Bolacha", "Jato", "Rato", "Bota", "Brio", "Corte", "Caju", "Outra", "Oito", "Rio", "Trio", "Rua", "Tia", "Lua", "Rota", "Boia", "Taco", "Rico", "Bote", "Tijolo"
+    };
+    
     char vetorLetras[20] = {'A','B','C','D','A','E','I','O','U','D','B','J','R','T','U','J','B','T','L','L'};
     char vetorRespostas[MAX][15];
-
     imprime_anagrama(vetorLetras);
+
+
 }
