@@ -27,6 +27,10 @@ int confere (char vetorPalavras[][15], char resposta[15]) {
 }
 
 int main () {
+    int contaErro = 1;
+    int contaAcerto = 0;
+    int flag;
+    char resposta[15];
     char vetorPalavras[MAX][15] = {
     "Bolacha", "Jato", "Rato", "Bota", "Brio", "Corte", "Caju", "Outra", "Oito", "Rio", "Trio", "Rua", "Tia", "Lua", "Rota", "Boia", "Taco", "Rico", "Bote", "Tijolo"
     };
@@ -39,23 +43,21 @@ int main () {
 
     
     imprime_anagrama(vetorLetras);
-
-    do
-    {
-        cout<<"\nDigite uma Palavra: ";
+    do {
+        cout<<"Nome: ";
         cin.getline(resposta, 15);
-
-        erro = confere(vetorPalavras, resposta);
-
-        if(erro){
-            conta_erros += 1;
-            cout<<"\nErrou!";
-        }else{
-            cout<<"\nAcertou!";
+        flag = confere(vetorPalavras, resposta);
+        if (flag == 0) {
+            strcpy(vetorRespostas[contaAcerto], resposta);
+            contaAcerto++;
         }
+        else {
+            contaErro++;
+        }
+    }while (contaErro < 6);
+    for(int ax = 0; ax < contaAcerto; ax++) {
+        cout<<vetorRespostas[ax]<<endl;
+    }
 
-            
-    } while ((conta_erros < 6) || (erro = 1));
-    
-
+    return 0;
 }
