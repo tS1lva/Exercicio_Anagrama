@@ -8,9 +8,9 @@ using namespace std;
 
 void imprime_anagrama(char *vetor_anagrama){
 
-    for (int i = 0 ; i < MAX ; i++){
-        cout<<vetor_anagrama[i];
-        if (i%4 == 0){
+    for (int i = 0 ; i < 20 ; i++){
+        cout<<vetor_anagrama[i]<<"   ";
+        if ((i+1)%4 == 0){
             cout<<endl;
         }
 
@@ -21,5 +21,7 @@ int main () {
     char vetorPalavras[MAX][15];
     char vetorLetras[20] = {'A','B','C','D','A','E','I','O','U','D','B','J','R','T','U','J','B','T','L','L'};
     char vetorRespostas[MAX][15];
-    
+
+
+    imprime_anagrama(vetorLetras);
 }
