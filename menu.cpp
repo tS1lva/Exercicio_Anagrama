@@ -6,7 +6,7 @@ using namespace std;
 #define MAX 30
 
 
-void imprime_jogo(char *vetor_anagrama, char vetorRespostas[][15], int num_erros, int num_acertos){
+void imprime_jogo(char *vetor_anagrama, char vetorRespostas[][15], int num_erros, int num_acertos,int dif_acertos, int dif_erros, char dificuldade[]){
     system("cls");
     for (int i = 0 ; i < 20 ; i++){
         cout<<vetor_anagrama[i]<<"   ";
@@ -17,7 +17,8 @@ void imprime_jogo(char *vetor_anagrama, char vetorRespostas[][15], int num_erros
     cout<<"\nNumero de erros: "<<num_erros;
     cout<<"\nNumero de acertos: "<<num_acertos;
     cout<<"\n\nATENCAO!!!";
-    cout<<"\n\nEste e o modo facil, voce precisa acertar "<<5-num_acertos<<" para ganhar !";
+    cout<<"\n\nEste e o modo "<<dificuldade<<", voce precisa acertar "<<dif_acertos-num_acertos<<" palavras para ganhar !";
+    cout<<"\nVoce pode errar "<<dif_erros-num_erros<<" vezes";
     cout<<"\nNao pode repetir palavras";
     cout<<"\nPara sair digite ENTER";
     if (num_acertos > 0) {
@@ -54,6 +55,7 @@ int valida(char resposta[15], int *contaErros, int tamanho) {
         return 1;
     }
 }
+
 void verifica(char vetorPalavras[][15], char Respostas[15], char vetorRespostas[][15], int *contaErros, int *contaAcertos) {
     int encontrada = 0;
     for (int ax = 0; ax < MAX; ax++) {
@@ -91,7 +93,8 @@ void imprimeBanco (char vetorPalavras[][15]) {
             cout<<vetorPalavras[ax]<<" ";
     }
 }
-int main () {
+
+void jogo (char dificuldade[], int dif_erros, int dif_acertos) {
     int contaErro = 0;
     int contaAcerto = 0;
     int flag;
@@ -104,20 +107,20 @@ int main () {
     char vetorRespostas[MAX][15];
     char bancoPalavras;
     do {
-        imprime_jogo(vetorLetras, vetorRespostas, contaErro, contaAcerto);
+        imprime_jogo(vetorLetras, vetorRespostas, contaErro, contaAcerto, dif_acertos, dif_erros, dificuldade);
         cout << "\n\nPalavra: ";
         cin.getline(resposta, 15);
         maiuscula(resposta, strlen(resposta));
-        if (strcmp(resposta, "ENTER")==0) {
+        if (strcmp(resposta,"ENTER")==0) {
             break;
         }
         flag = valida(resposta, &contaErro, strlen(resposta));
         if (flag == 1) {
             verifica(vetorPalavras, resposta, vetorRespostas, &contaErro, &contaAcerto);
         }
-    } while (contaErro < 5 && contaAcerto < 5);
+    } while (contaErro < dif_erros && contaAcerto < dif_acertos);
     system("cls");
-    if(contaAcerto == 5) {
+    if(contaAcerto == dif_acertos) {
         cout<<"Parabens vc ganhou :) ";
     }
     else {
@@ -130,6 +133,48 @@ int main () {
     }while(bancoPalavras != 'S' && bancoPalavras != 'N');
     if (bancoPalavras == 'S') {
         imprimeBanco(vetorPalavras);
-        cout<<endl;
+        cout<<endl<<endl;
+        system("pause");
     }
+}
+
+int main() {
+    int opcao;
+    int dif_erros;
+    int dif_acertos;
+    char dificuldade[15];
+    system("cls");
+    cout<<"Seja bem vindo ao ANAGRAMA PUC jogo desenvolvido por Vinicius Mendes e Tiago pereira ";
+    cout<<"\n\n";
+    system("pause");
+    do {
+        system("cls");
+        cout<<"1-Facil";
+        cout<<"\n2-Medio";
+        cout<<"\n3-Dificil";
+        cout<<"\n4-Sair";
+        cout<<"\n\nPor favor escolha uma das opcoes: ";
+        cin>>opcao;
+        cin.ignore();
+        switch (opcao)
+        {
+        case 1:dif_erros = 8;
+            dif_acertos = 5;
+            strcpy(dificuldade, "facil");
+            jogo(dificuldade, dif_erros, dif_acertos);
+            break;
+        case 2:dif_erros = 7;
+            dif_acertos = 10;
+            strcpy(dificuldade, "medio");
+            jogo(dificuldade, dif_erros, dif_acertos);
+            break;
+        case 3:dif_erros = 5;
+            dif_acertos = 15;
+            strcpy(dificuldade, "dificil");
+            jogo(dificuldade, dif_erros, dif_acertos);
+            break;
+        case 4: cout<<"\n\nObrigado por jogar o jogo!!";
+        }
+    } while (opcao != 4);
+    return 0;
 }
