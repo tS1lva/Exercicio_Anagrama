@@ -20,7 +20,7 @@ void imprime_jogo(char *vetor_anagrama, char vetorRespostas[][15], int num_erros
     cout<<"\n\nEste e o modo "<<dificuldade<<", voce precisa acertar "<<dif_acertos-num_acertos<<" palavras para ganhar !";
     cout<<"\nVoce pode errar "<<dif_erros-num_erros<<" vezes";
     cout<<"\nNao pode repetir palavras";
-    cout<<"\nPara sair digite ENTER";
+    cout<<"\nPara sair precione 'Enter' ";
     if (num_acertos > 0) {
         cout<<"\n\n------------------------------";
         cout<<"\nPalavras ja acertadas: \n";
@@ -111,7 +111,7 @@ void jogo (char dificuldade[], int dif_erros, int dif_acertos) {
         cout << "\n\nPalavra: ";
         cin.getline(resposta, 15);
         maiuscula(resposta, strlen(resposta));
-        if (strcmp(resposta,"ENTER")==0) {
+        if (strcmp(resposta,"")==0) {
             break;
         }
         flag = valida(resposta, &contaErro, strlen(resposta));
